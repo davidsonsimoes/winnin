@@ -19,17 +19,20 @@ const HomePage: React.FC = () => {
 
   return (
     <HomePageWrapper>
+      <>
       <Header />
       <Menu onMenuClick={() => console.log('teste')} activeFilter='hot' />
+      {console.log({posts})}
       <Container>
         <List>
             <div className="App">
                 <p>
                     home
                 </p>
-        </div>
+            </div>
         </List>
       </Container>
+      </>
     </HomePageWrapper>
   );
 };
