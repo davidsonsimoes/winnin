@@ -1,5 +1,5 @@
 import React from 'react';
-import { RedditProvider } from './presentation/context/RedditContext';
+import { RedditProvider } from '@context/RedditContext';
 
 const App: React.FC = () => {
   return (
