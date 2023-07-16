@@ -3,16 +3,14 @@ import { ThemeProvider } from 'styled-components';
 import { RedditProvider } from '@context/RedditContext';
 import theme from '@styles/theme';
 import GlobalStyles from '@styles/GlobalStyles';
+import HomePage from '@pages/HomePage';
+
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <RedditProvider>
-        <div className="App">
-            <p>
-              home
-            </p>
-        </div>
+        <HomePage />
       </RedditProvider>
     </ThemeProvider>
   );
