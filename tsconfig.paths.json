@@ -8,7 +8,8 @@
         "@components/*": ["./src/presentation/components/*"],
         "@pages/*": ["./src/presentation/pages/*"],
         "@styles/*": ["./src/presentation/styles/*"],
-        "@context/*": ["./src/presentation/context/*"]
+        "@context/*": ["./src/presentation/context/*"],
+        "@assets/*": ["./src/presentation/assets/*"]
       },
     }
   }

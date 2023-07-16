@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import { RedditContext } from '../context/RedditContext';
+import { RedditContext } from '@context/RedditContext';
 import { HomePageWrapper } from './style';
+import Header from '@components/Header';
 
 const HomePage: React.FC = () => {
   const { posts, loading, error } = useContext(RedditContext);
@@ -15,7 +16,7 @@ const HomePage: React.FC = () => {
 
   return (
     <HomePageWrapper>
-      <div>Header</div>
+      <Header />
       <div>Menu</div>
       <div className="App">
         <p>
