@@ -4,9 +4,9 @@ export interface RedditPost {
   id: string;
   title: string;
   author: string;
-  date: number;
-  domain: number;
-  postImage: number;
+  date: string;
+  domain: string;
+  postImage: string;
 }
 
 export async function getRedditPosts(filter: string, after?: string): Promise<RedditPost[]> {

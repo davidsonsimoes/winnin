@@ -5,6 +5,7 @@ import Header from '@components/Header';
 import Menu from '@components/Menu';
 import Container from '@components/Container';
 import List from '@components/List';
+import ListItem from '@components/ListItem';
 
 const HomePage: React.FC = () => {
   const { posts, loading, error } = useContext(RedditContext);
@@ -25,11 +26,7 @@ const HomePage: React.FC = () => {
       {console.log({posts})}
       <Container>
         <List>
-            <div className="App">
-                <p>
-                    home
-                </p>
-            </div>
+            {posts.map(item => <ListItem data={item} key={item.id} />)}
         </List>
       </Container>
       </>

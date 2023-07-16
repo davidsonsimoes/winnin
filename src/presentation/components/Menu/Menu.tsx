@@ -10,19 +10,19 @@ const Menu: React.FC<MenuProps> = ({ activeFilter, onMenuClick }) => {
   return (
     <MenuWrapper>
       <MenuButton
-        isActive={activeFilter === "hot"}
+        isactive={activeFilter === "hot"}
         onClick={() => onMenuClick("hot")}
       >
         Hot
       </MenuButton>
       <MenuButton
-        isActive={activeFilter === "new"}
+        isactive={activeFilter === "new"}
         onClick={() => onMenuClick("new")}
       >
         New
       </MenuButton>
       <MenuButton
-        isActive={activeFilter === "new"}
+        isactive={activeFilter === "new"}
         onClick={() => onMenuClick("rising")}>
             Rising
         </MenuButton>

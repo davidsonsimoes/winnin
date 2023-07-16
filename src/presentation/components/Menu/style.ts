@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface MenuButtonProps {
- isActive?: boolean;
+ isactive: boolean;
 }
 
 export const MenuWrapper = styled.nav`
@@ -10,7 +10,7 @@ export const MenuWrapper = styled.nav`
 `;
 
 export const MenuButton = styled.button.attrs<MenuButtonProps>((props) => ({
-    isActive: props.isActive,
+    isactive: props.isactive,
   }))<MenuButtonProps>`
   width: 202px;
   height: 48px;
@@ -25,8 +25,8 @@ export const MenuButton = styled.button.attrs<MenuButtonProps>((props) => ({
   font-family: ${({ theme }) => theme.font.family};
   font-weight: ${({ theme }) => theme.font.weights.regular};
   margin: 0 10px;
-  ${({ isActive }) =>
-    isActive &&
+  ${({ isactive }) =>
+    isactive &&
     css`
       background-color: ${({ theme }) => theme.colors.primary};
     `};
