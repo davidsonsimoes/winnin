@@ -1,46 +1,129 @@
-# Getting Started with Create React App
+## Projeto "winnin" - Leitor de Posts do Reddit
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+O projeto "winnin" é uma aplicação web desenvolvida em React.js com TypeScript, seguindo a arquitetura Clean Architecture. O objetivo dessa aplicação é permitir que os usuários leiam e visualizem os posts do Reddit de um subreddit específico. Os usuários poderão escolher entre as opções "hot", "new" e "rising" para visualizar os posts mais populares, recentes e em destaque.
 
-## Available Scripts
+**Resultado Esperado**
 
-In the project directory, you can run:
+<p align="center">
+  <img src="/doc/welcome.jpg" width="100%" />
+</p>
 
-### `npm start`
+### Arquitetura Clean Architecture
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+A Clean Architecture é um padrão de arquitetura de software que visa criar projetos altamente coesos e com baixo acoplamento. O projeto é dividido em camadas, permitindo que as responsabilidades sejam bem separadas. As camadas principais são:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **data**: Contém a implementação de toda a lógica de interação com fontes de dados externas, como APIs e bancos de dados. Dentro da pasta `api`, você encontra os módulos responsáveis por fazer as requisições para a API do Reddit e outras APIs (se houver). A pasta `repositories` contém as interfaces que definem os contratos de acesso a dados para as entidades do domínio.
 
-### `npm test`
+- **domain**: Nesta pasta, estão as regras de negócio da aplicação, os modelos de dados (ou entidades) e as interfaces dos repositórios (interfaces de acesso aos dados). Os modelos de dados na pasta `models` representam as entidades principais da aplicação, como `Post` e `User`. A pasta `usecases` contém as implementações dos casos de uso, como `GetRedditPosts` e `SavePost`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **presentation**: É responsável pela interface de usuário e a interação do usuário com o sistema. Na pasta `components`, você encontrará os componentes React reutilizáveis, como `PostList` e `PostItem`. A pasta `pages` contém as páginas React, como a `HomePage` e a `PostDetailsPage`. A pasta `styles` pode conter os arquivos de estilo global e outros arquivos relacionados a estilos.
 
-### `npm run build`
+#### Estrutura de pastas
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+winnin/
+  ├── src/
+  │    ├── data/
+  │    │    ├── api/
+  │    │    │    ├── redditApi.ts
+  │    │    │    └── otherApi.ts
+  │    │    ├── repositories/
+  │    │    │    ├── PostRepository.ts
+  │    │    │    └── UserRepository.ts
+  │    │    └── ...
+  │    │
+  │    ├── domain/
+  │    │    ├── models/
+  │    │    │    ├── Post.ts
+  │    │    │    └── User.ts
+  │    │    ├── repositories/
+  │    │    │    ├── PostRepository.ts
+  │    │    │    └── UserRepository.ts
+  │    │    ├── usecases/
+  │    │    │    ├── GetRedditPosts.ts
+  │    │    │    ├── SavePost.ts
+  │    │    │    └── ...
+  │    │    └── ...
+  │    │
+  │    ├── presentation/
+  │    │    ├── components/
+  │    │    │    ├── PostList.tsx
+  │    │    │    ├── PostItem.tsx
+  │    │    │    └── ...
+  │    │    ├── pages/
+  │    │    │    ├── HomePage.tsx
+  │    │    │    ├── PostDetailsPage.tsx
+  │    │    │    └── ...
+  │    │    ├── styles/
+  │    │    │    ├── global.css
+  │    │    │    └── ...
+  │    │    └── ...
+  │    │
+  │    └── index.tsx
+  └── ...
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Tecnologias Utilizadas
 
-### `npm run eject`
+- [X] React.js
+- [X] TypeScript
+- [X] Axios
+- [X] Jest
+- [X] React Testing Library
+- [X] Clean Architecture
+- [X] Styled Component
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Como Rodar o Projeto
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Para executar o projeto "winnin" em sua máquina local, siga os passos abaixo:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. Certifique-se de ter o Node.js instalado. Se ainda não tiver, faça o download em https://nodejs.org/ e siga as instruções de instalação.
 
-## Learn More
+2. Clone este repositório para a sua máquina:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+git clone https://github.com/seu-usuario/winnin.git
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. Navegue para a pasta do projeto:
+
+```bash
+cd winnin
+```
+
+4. Instale as dependências do projeto:
+
+```bash
+npm install
+```
+
+5. Execute o projeto em modo de desenvolvimento:
+
+```bash
+npm start
+```
+
+O servidor de desenvolvimento será iniciado e o projeto estará disponível em http://localhost:3000.
+
+### Como Executar os Testes
+
+Para executar os testes unitários, utilize o seguinte comando:
+
+```bash
+npm test
+```
+
+Os testes serão executados, e você poderá ver os resultados no terminal.
+
+### Contatos
+
+<a href="https://www.linkedin.com/in/davidson-sim%C3%B5es-78b2225a/">
+  <img alt="Connect with me" src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" />
+</a>
+<a href="https://www.davidsonsimoes.com.br/">
+  <img alt="Connect with me" src="https://img.shields.io/badge/Website-FE7A16?style=for-the-badge" />
+</a>
+
+
