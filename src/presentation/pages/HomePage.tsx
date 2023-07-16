@@ -3,6 +3,7 @@ import { RedditContext } from '@context/RedditContext';
 import { HomePageWrapper } from './style';
 import Header from '@components/Header';
 import Menu from '@components/Menu';
+import Container from '@components/Container';
 
 const HomePage: React.FC = () => {
   const { posts, loading, error } = useContext(RedditContext);
@@ -19,11 +20,13 @@ const HomePage: React.FC = () => {
     <HomePageWrapper>
       <Header />
       <Menu onMenuClick={() => console.log('teste')} activeFilter='hot' />
-      <div className="App">
-        <p>
-            home
-        </p>
+      <Container>
+        <div className="App">
+            <p>
+                home
+            </p>
        </div>
+      </Container>
     </HomePageWrapper>
   );
 };
