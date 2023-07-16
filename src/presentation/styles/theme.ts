@@ -4,6 +4,7 @@ const theme = {
       secondary: '#A7B0BE', // Cor secundária
       background: '#FFFFFF', // Cor de fundo
       text: '#000', // Cor do texto
+      white: '#FFF'
     },
     font: {
       family: "'Mulish', sans-serif",
