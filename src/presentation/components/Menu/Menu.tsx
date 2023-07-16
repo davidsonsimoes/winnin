@@ -22,7 +22,7 @@ const Menu: React.FC<MenuProps> = ({ activeFilter, onMenuClick }) => {
         New
       </MenuButton>
       <MenuButton
-        isactive={activeFilter === "new"}
+        isactive={activeFilter === "rising"}
         onClick={() => onMenuClick("rising")}>
             Rising
         </MenuButton>

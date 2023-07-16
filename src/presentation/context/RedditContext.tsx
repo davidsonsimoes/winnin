@@ -8,6 +8,7 @@ interface RedditContextData {
   error: string | null;
   loadMorePosts: () => void;
   changeFilter: (filter: string) => void;
+  activeFilter: string;
 }
 
 export const RedditContext = createContext<RedditContextData>({
@@ -16,6 +17,7 @@ export const RedditContext = createContext<RedditContextData>({
   error: null,
   loadMorePosts: () => {},
   changeFilter: () => {},
+  activeFilter: 'hot',
 });
 
 interface RedditContextProviderProps {
@@ -32,19 +34,19 @@ export const RedditProvider: React.FC<RedditContextProviderProps> = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [after, setAfter] = useState<string | undefined>(undefined);
-  const [currentFilter, setCurrentFilter] = useState<string>('hot');
+  const [activeFilter, setCurrentFilter] = useState<string>('hot');
 
   useEffect(() => {
     setLoading(true);
-    getRedditPosts(currentFilter).then((data) => {
+    getRedditPosts(activeFilter).then((data) => {
       setPosts(data);
       setLoading(false);
     });
-  }, [getRedditPosts, currentFilter]);
+  }, [getRedditPosts, activeFilter]);
 
   const loadMorePosts = () => {
     setLoading(true);
-    getRedditPosts(currentFilter, after).then((data) => {
+    getRedditPosts(activeFilter, after).then((data) => {
       setPosts((prevPosts) => [...prevPosts, ...data]);
       setAfter(data.length > 0 ? data[data.length - 1].id : undefined);
       setLoading(false);
@@ -56,7 +58,7 @@ export const RedditProvider: React.FC<RedditContextProviderProps> = ({
   };
 
   return (
-    <RedditContext.Provider value={{ posts, loading, error, loadMorePosts, changeFilter }}>
+    <RedditContext.Provider value={{ posts, loading, error, loadMorePosts, changeFilter, activeFilter }}>
       {children}
     </RedditContext.Provider>
   );

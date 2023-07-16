@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { RedditContext } from '@context/RedditContext';
 import { HomePageWrapper } from './style';
 import Header from '@components/Header';
@@ -8,7 +8,20 @@ import List from '@components/List';
 import ListItem from '@components/ListItem';
 
 const HomePage: React.FC = () => {
-  const { posts, loading, error } = useContext(RedditContext);
+  const { posts, loading, error, loadMorePosts, changeFilter, activeFilter } = useContext(RedditContext);
+
+  useEffect(() => {
+    // Carrega os posts iniciais ao montar a página
+    loadInitialPosts();
+  }, []);
+  
+  const loadInitialPosts = () => {
+    changeFilter('hot'); // Define o filtro inicial como 'hot'
+  };
+
+  const handleMenuClick = (filter: string) => {
+    changeFilter(filter); // Atualiza o filtro com base no botão clicado
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -22,8 +35,7 @@ const HomePage: React.FC = () => {
     <HomePageWrapper>
       <>
       <Header />
-      <Menu onMenuClick={() => console.log('teste')} activeFilter='hot' />
-      {console.log({posts})}
+      <Menu onMenuClick={handleMenuClick} activeFilter={activeFilter} />
       <Container>
         <List>
             {posts.map(item => <ListItem data={item} key={item.id} />)}
