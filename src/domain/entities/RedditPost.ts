@@ -6,3 +6,8 @@ export interface RedditPost {
   domain: string;
   postImage: string;
 }
+
+export interface RedditPostData {
+  data: RedditPost[],
+  after: string;
+}

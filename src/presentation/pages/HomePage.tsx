@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { RedditContext } from '@context/RedditContext';
 import { HomePageWrapper, ButtonStyle } from './style';
 import Header from '@components/Header';
@@ -11,6 +11,7 @@ import SkeletonGrid from '@components/Skeleton';
 const HomePage: React.FC = () => {
   const { posts, loading, error, loadMorePosts, changeFilter, activeFilter } = useContext(RedditContext);
   const [page, setPage] = useState<number>(1);
+  const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     loadInitialPosts();
@@ -29,6 +30,12 @@ const HomePage: React.FC = () => {
 
   const handleLoadMore = () => {
     setPage((prevPage) => prevPage + 1);
+
+    setTimeout(() => {
+      if (bottomRef.current) {
+        bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 1000)
   };
 
   useEffect(() => {
@@ -50,6 +57,7 @@ const HomePage: React.FC = () => {
             {posts.map((item, index) => <ListItem data={item} key={index} />)}
             {!loading && <ButtonStyle onClick={handleLoadMore}>+ Ver mais</ButtonStyle>}
         </List>}
+        <div ref={bottomRef} />
       </Container>
       </>
     </HomePageWrapper>

@@ -1,6 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { RedditPost } from '@data/repositories/PostRepository';
-import { GetRedditPostsUseCase } from '@domain/usecases/PostUseCase';
+import {RedditRepository} from '@data/repositories/RedditRepository';
+
+import { GetRedditPostsUseCase } from '@domain/usecases/GetRedditPostsUseCase';
 
 interface RedditContextData {
   posts: RedditPost[];
@@ -21,34 +23,37 @@ export const RedditContext = createContext<RedditContextData>({
 });
 
 interface RedditContextProviderProps {
-  getRedditPosts: GetRedditPostsUseCase;
   children: React.ReactNode;
 }
 
 
 export const RedditProvider: React.FC<RedditContextProviderProps> = ({
-  children,
-  getRedditPosts,
+  children
 }) => {
   const [posts, setPosts] = useState<RedditPost[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error,] = useState<string | null>(null);
   const [after, setAfter] = useState<string | undefined>(undefined);
   const [activeFilter, setCurrentFilter] = useState<string>('hot');
-
+  
+  const redditRepo = new RedditRepository();
+  const redditUseCase = new GetRedditPostsUseCase(redditRepo);
+  
   useEffect(() => {
     setLoading(true);
-    getRedditPosts(activeFilter, 1).then((data) => {
-      setPosts(data);
+    redditUseCase.getRedditPosts(activeFilter).then((data) => {
+      setPosts(data.data);
+      setAfter(data.after);
       setLoading(false);
     });
-  }, [getRedditPosts, activeFilter]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeFilter]);
 
-  const loadMorePosts = (page: number): Promise<void> => {
+  const loadMorePosts = (): Promise<void> => {
     setLoading(true);
-    return getRedditPosts(activeFilter, page, after).then((data) => {
-      setPosts((prevPosts) => [...prevPosts, ...data]);
-      setAfter(data.length > 0 ? data[data.length - 1].id : undefined);
+    return redditUseCase.getRedditPosts(activeFilter, after).then((data) => {
+      setPosts((prevPosts) => [...prevPosts, ...data.data]);
+      setAfter(data.after);
       setLoading(false);
     });
   };
