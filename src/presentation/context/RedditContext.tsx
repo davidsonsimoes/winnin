@@ -54,6 +54,7 @@ export const RedditProvider: React.FC<RedditContextProviderProps> = ({
   };
 
   const changeFilter = (filter: string) => {
+    setPosts([])
     setCurrentFilter(filter);
   };
 
