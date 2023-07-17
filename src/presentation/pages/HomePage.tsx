@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { RedditContext } from '@context/RedditContext';
 import { HomePageWrapper, ButtonStyle } from './style';
 import Header from '@components/Header';
@@ -10,19 +10,29 @@ import SkeletonGrid from '@components/Skeleton';
 
 const HomePage: React.FC = () => {
   const { posts, loading, error, loadMorePosts, changeFilter, activeFilter } = useContext(RedditContext);
+  const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
-    // Carrega os posts iniciais ao montar a página
     loadInitialPosts();
   }, []);
-  
+
   const loadInitialPosts = () => {
-    changeFilter('hot'); // Define o filtro inicial como 'hot'
+    setPage(1);
+    changeFilter('hot');
   };
 
   const handleMenuClick = (filter: string) => {
-    changeFilter(filter); // Atualiza o filtro com base no botão clicado
+    setPage(1);
+    changeFilter(filter);
   };
+
+  const handleLoadMore = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
+
+  useEffect(() => {
+    loadMorePosts(page)
+  }, [page]);
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -34,9 +44,9 @@ const HomePage: React.FC = () => {
       <Header />
       <Menu onMenuClick={handleMenuClick} activeFilter={activeFilter} />
       <Container>
-          {loading ? <SkeletonGrid /> : <List>
-            {posts.map(item => <ListItem data={item} key={item.id} />)}
-            {!loading && <ButtonStyle isactive={true} onMenuClick={loadMorePosts}>+ Ver mais</ButtonStyle>}
+          {loading && posts.length === 0 ? <SkeletonGrid /> : <List>
+            {posts.map((item, index) => <ListItem data={item} key={index} />)}
+            {!loading && <ButtonStyle onClick={handleLoadMore}>+ Ver mais</ButtonStyle>}
         </List>}
       </Container>
       </>

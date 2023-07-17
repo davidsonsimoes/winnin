@@ -3,12 +3,12 @@ import { MenuButton } from './style';
 
 interface IProps {
   children: React.ReactNode;
-  isactive: boolean;
+  isActive: boolean;
   onMenuClick: () => void;
 }
 
 const Button = (props: IProps) => {
-  return <MenuButton menuActive={props.isactive} onClick={props.onMenuClick} {...props}>{props.children}</MenuButton>;
+  return <MenuButton onClick={props.onMenuClick} isActive={props.isActive}>{props.children}</MenuButton>;
 };
 
 export default Button;

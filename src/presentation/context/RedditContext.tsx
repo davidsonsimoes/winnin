@@ -6,7 +6,7 @@ interface RedditContextData {
   posts: RedditPost[];
   loading: boolean;
   error: string | null;
-  loadMorePosts: () => void;
+  loadMorePosts: (page: number) => Promise<void>;
   changeFilter: (filter: string) => void;
   activeFilter: string;
 }
@@ -15,7 +15,7 @@ export const RedditContext = createContext<RedditContextData>({
   posts: [],
   loading: false,
   error: null,
-  loadMorePosts: () => {},
+  loadMorePosts: () => Promise.resolve(),
   changeFilter: () => {},
   activeFilter: 'hot',
 });
@@ -38,15 +38,15 @@ export const RedditProvider: React.FC<RedditContextProviderProps> = ({
 
   useEffect(() => {
     setLoading(true);
-    getRedditPosts(activeFilter).then((data) => {
+    getRedditPosts(activeFilter, 1).then((data) => {
       setPosts(data);
       setLoading(false);
     });
   }, [getRedditPosts, activeFilter]);
 
-  const loadMorePosts = () => {
+  const loadMorePosts = (page: number): Promise<void> => {
     setLoading(true);
-    getRedditPosts(activeFilter, after).then((data) => {
+    return getRedditPosts(activeFilter, page, after).then((data) => {
       setPosts((prevPosts) => [...prevPosts, ...data]);
       setAfter(data.length > 0 ? data[data.length - 1].id : undefined);
       setLoading(false);

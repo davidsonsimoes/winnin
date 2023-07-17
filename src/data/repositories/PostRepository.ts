@@ -4,12 +4,12 @@ export interface RedditPost {
   id: string;
   title: string;
   author: string;
-  date: string;
+  date: number;
   domain: string;
   postImage: string;
 }
 
-export async function getRedditPosts(filter: string, after?: string): Promise<RedditPost[]> {
+export async function getRedditPosts(filter: string, page?: number, after?: string): Promise<RedditPost[]> {
   const data = await fetchRedditPosts(filter, after);
   return data.data.children.map((child: any) => ({
     id: child.data.id,
