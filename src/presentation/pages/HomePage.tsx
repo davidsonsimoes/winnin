@@ -6,6 +6,7 @@ import Menu from '@components/Menu';
 import Container from '@components/Container';
 import List from '@components/List';
 import ListItem from '@components/ListItem';
+import SkeletonGrid from '@components/Skeleton';
 
 const HomePage: React.FC = () => {
   const { posts, loading, error, loadMorePosts, changeFilter, activeFilter } = useContext(RedditContext);
@@ -23,10 +24,6 @@ const HomePage: React.FC = () => {
     changeFilter(filter); // Atualiza o filtro com base no botão clicado
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -37,9 +34,9 @@ const HomePage: React.FC = () => {
       <Header />
       <Menu onMenuClick={handleMenuClick} activeFilter={activeFilter} />
       <Container>
-        <List>
+          {loading ? <SkeletonGrid /> : <List>
             {posts.map(item => <ListItem data={item} key={item.id} />)}
-        </List>
+        </List>}
       </Container>
       </>
     </HomePageWrapper>
