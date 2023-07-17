@@ -14,6 +14,7 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     loadInitialPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadInitialPosts = () => {
@@ -32,6 +33,7 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     loadMorePosts(page)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   if (error) {

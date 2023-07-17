@@ -32,7 +32,7 @@ export const RedditProvider: React.FC<RedditContextProviderProps> = ({
 }) => {
   const [posts, setPosts] = useState<RedditPost[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error,] = useState<string | null>(null);
   const [after, setAfter] = useState<string | undefined>(undefined);
   const [activeFilter, setCurrentFilter] = useState<string>('hot');
 
