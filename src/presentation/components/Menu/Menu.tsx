@@ -1,5 +1,6 @@
 import React from "react";
-import { MenuWrapper, MenuButton } from "./style";
+import { MenuWrapper } from "./style";
+import Button from "@components/Button";
 
 interface MenuProps {
   activeFilter: string;
@@ -9,23 +10,23 @@ interface MenuProps {
 const Menu: React.FC<MenuProps> = ({ activeFilter, onMenuClick }) => {
   return (
     <MenuWrapper>
-      <MenuButton
+      <Button
         isactive={activeFilter === "hot"}
-        onClick={() => onMenuClick("hot")}
+        onMenuClick={() => onMenuClick("hot")}
       >
         Hot
-      </MenuButton>
-      <MenuButton
+      </Button>
+      <Button
         isactive={activeFilter === "new"}
-        onClick={() => onMenuClick("new")}
+        onMenuClick={() => onMenuClick("new")}
       >
         New
-      </MenuButton>
-      <MenuButton
+      </Button>
+      <Button
         isactive={activeFilter === "rising"}
-        onClick={() => onMenuClick("rising")}>
+        onMenuClick={() => onMenuClick("rising")}>
             Rising
-        </MenuButton>
+        </Button>
     </MenuWrapper>
   );
 };

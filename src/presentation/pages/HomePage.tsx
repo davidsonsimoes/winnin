@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { RedditContext } from '@context/RedditContext';
-import { HomePageWrapper } from './style';
+import { HomePageWrapper, ButtonStyle } from './style';
 import Header from '@components/Header';
 import Menu from '@components/Menu';
 import Container from '@components/Container';
@@ -36,6 +36,7 @@ const HomePage: React.FC = () => {
       <Container>
           {loading ? <SkeletonGrid /> : <List>
             {posts.map(item => <ListItem data={item} key={item.id} />)}
+            {!loading && <ButtonStyle isactive={true} onMenuClick={loadMorePosts}>+ Ver mais</ButtonStyle>}
         </List>}
       </Container>
       </>
