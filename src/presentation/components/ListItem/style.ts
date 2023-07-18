@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ListItemWrapper = styled.article`
-  border-top: 1px solid #4C5667;
+  border-top: 1px solid ${({ theme }) => theme.colors.borderColor};
   padding: 12px 0;
   display: flex;
   flex-direction: row;
@@ -37,14 +37,15 @@ export const ContentDetails = styled.div`
     font-weight: ${({ theme }) => theme.font.weights.bold};
     margin: 0;
     padding: 0;
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.titleList};
     font-size: 20px;
     line-height: normal;
   }
   p {
     margin: 0 0 10px 0;
     padding: 0;
-
+    color: ${({ theme }) => theme.colors.textColorSubtitle};
+    
     strong {
       color: ${({ theme }) => theme.colors.primary };
       font-weight: ${({ theme }) => theme.font.weights.regular};
@@ -55,7 +56,7 @@ export const ContentDetails = styled.div`
     font-weight: ${({ theme }) => theme.font.weights.bold};
     margin: 0;
     padding: 0;
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.textColorDomain};
     font-size: 16px;
     line-height: normal;
   }

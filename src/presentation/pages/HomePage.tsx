@@ -8,7 +8,11 @@ import List from '@components/List';
 import ListItem from '@components/ListItem';
 import SkeletonGrid from '@components/Skeleton';
 
-const HomePage: React.FC = () => {
+type PropHomePage = {
+  toggleDarkMode: () => void
+}
+
+const HomePage = ({ toggleDarkMode }: PropHomePage) => {
   const { posts, loading, error, loadMorePosts, changeFilter, activeFilter } = useContext(RedditContext);
   const [page, setPage] = useState<number>(1);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -50,7 +54,7 @@ const HomePage: React.FC = () => {
   return (
     <HomePageWrapper>
       <>
-      <Header />
+      <Header toggleDarkMode={toggleDarkMode} />
       <Menu onMenuClick={handleMenuClick} activeFilter={activeFilter} />
       <Container>
           {loading && posts.length === 0 ? <SkeletonGrid /> : <List>

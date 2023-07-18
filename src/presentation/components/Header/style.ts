@@ -9,6 +9,7 @@ export const HeaderWrapper = styled.header`
   justify-content: center;
   text-align: center;
   color: #fff;
+  position: relative;
 
   img {
     width: 160px;
