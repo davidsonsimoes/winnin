@@ -117,6 +117,9 @@ npm test
 
 Os testes serão executados, e você poderá ver os resultados no terminal.
 
+### Link de resultado do projeto
+<a href="https://bucolic-palmier-5d21cf.netlify.app/">https://bucolic-palmier-5d21cf.netlify.app/</a>
+
 ### Contatos
 
 <a href="https://www.linkedin.com/in/davidson-sim%C3%B5es-78b2225a/">
